@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Match Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+    <h1>Donor Match Result</h1>
+
+    {% if error %}
+        <p class="error-message">{{ error }}</p>
+    {% else %}
+        <div class="result-container">
+            <h2>Best Donor Found:</h2>
+            <ul>
+                {% for key, value in donor_data.items() %}
+                    <li><strong>{{ key.replace('_', ' ') | capitalize }}:</strong> {{ value }}</li>
+                {% endfor %}
+            </ul>
+            <button onclick="window.location.href='/'">Find Another Donor</button>
+        </div>
+        </div>
+    {% endif %}
+</body>
+</html>

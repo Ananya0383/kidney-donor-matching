@@ -1,0 +1,85 @@
+/* Reset default margin and padding */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #e6f2ff;
+}
+
+/* Fullscreen background image */
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%; /* Full viewport height */
+  background-image: url('image.png');
+  background-size: contain;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Shadow for better text visibility */
+}
+
+/* Styling for the heading */
+h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 0;
+  color: #fff;
+  text-align: center;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.77);; /* Semi-transparent background */
+  border-radius: 8px;
+}
+h1:hover{
+  /* transform: translateY(-5px); */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+  background-color: rgb(27, 21, 21);
+}
+/* Styling for the subheading */
+h2 {
+  font-size: 24px;
+  margin: 20px 0;
+  color: #fff;
+  text-align: center;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.78);
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+h2:hover{
+  /* transform: translateY(-5px); */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+  background-color: black;
+}
+
+/* Button container styling */
+.button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Styling the button */
+.custom-button {
+  background-color: #089a0d;
+  color: white;
+  padding: 15px 32px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.custom-button:hover {
+  background-color: #188a1d;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+}

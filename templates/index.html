@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidney Donor Matching</title>
+    <link rel="stylesheet" href="/css file/style.css">
+
+</head>
+<body>
+    <div class="container">
+    <h1>Kidney Donor Matching Form</h1>
+    <form action="/predict" method="POST">
+        <label for="tissue_type">Blood Type:</label>
+        <select id="tissue_type" name="tissue_type" required>
+            <option value="" disabled selected>Select your blood type</option>
+            <option value="A">A+</option>
+            <option value="A">A-</option>
+            <option value="B">B+</option>
+            <option value="B">B-</option>
+            <option value="AB">AB+</option>
+            <option value="AB">AB-</option>
+            <option value="O">O+</option>
+            <option value="O">O-</option>
+        </select><br>
+
+        <label for="medical_history">Medical History:</label>
+        <input type="text" id="medical_history" name="medical_history" required><br>
+
+        <label for="demographics">Demographics:</label>
+        <select id="demographics" name="demographics" required>
+            <option value="" disabled selected>Select Demographics area</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Uttar Pradesh">Uttar Pradesh</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Rajasthan">Rajasthan</option>
+        </select><br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br>
+
+        <label for="sex">Sex:</label>
+        <select id="sex" name="sex" required>
+            <option value="" disabled selected>Select sex</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+        </select><br>
+
+        <label for="weight">Weight(in kg):</label>
+        <input type="number" id="weight" name="weight" required><br>
+
+        <label for="height">Height(in cm):</label>
+        <input type="number" id="height" name="height" required><br>
+
+        <label for="waiting_time">Waiting Time (in months):</label>
+        <input type="number" id="waiting_time" name="waiting_time" required><br>
+
+        <label for="urgency">Urgency:</label>
+        <select id="urgency" name="urgency" required>
+            <option value="" disabled selected>Select urgency level</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select><br>
+        <button type="submit">Find Donor</button>
+    </form>
+
+</form>
+
+<!-- PDF Upload Form -->
+<h2>OR</h2>
+    
+    <!-- Form to select a PDF file from the folder -->
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <label for="file">Upload Patient Form (PDF):</label>
+        <input type="file" id="file" name="file" accept=".pdf" required><br>
+
+        <button type="submit">Upload and Find Donor</button>
+    </form>
+    <div id="result"></div>
+    </div>
+    <script>
+        document.getElementById('donor-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const formData = {
+        tissue_type: document.querySelector('input[name="tissue_type"]').value,
+        medical_history: document.querySelector('input[name="medical_history"]').value,
+        demographics: document.querySelector('input[name="demographics"]').value,
+        age: parseInt(document.querySelector('input[name="age"]').value),
+        sex: document.querySelector('input[name="sex"]').value,
+        weight: parseInt(document.querySelector('input[name="weight"]').value),
+        height: parseInt(document.querySelector('input[name="height"]').value),
+        waiting_time: parseInt(document.querySelector('input[name="waiting_time"]').value),
+        urgency: parseInt(document.querySelector('input[name="urgency"]').value)
+    };
+
+    fetch('http://127.0.0.1:5000/predict', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('result').textContent = data.matching_donor ? 'Match found!' : 'No match found.';
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+    </script>
+</body>
+</html>
